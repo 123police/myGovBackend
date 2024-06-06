@@ -5,13 +5,11 @@ const Schema = mongoose.Schema; // Correct capitalization
 const userSchema = new Schema({
   // Correct capitalization
   profilePic: String,
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  accountType: { type: String, required: true },
-  history: { type: String, required: true },
-  bookedAppointments: { type: String, required: true },
+  email: { type: String, required: true },
+  password: { type: String, required: false },
+  phoneNumber: { type: String, required: false },
+  mediaCareCard: { type: String, required: false },
+  DriverLicense: { type: String, required: false },
 });
 
 const UserModel = mongoose.model("User", userSchema);
