@@ -8,7 +8,7 @@ const {
   getAllUsers,
 } = require("../controllers/authController");
 
-// MIDLEWARE
+// MIDDLEWARE
 
 router.use(
   cors({
