@@ -17,7 +17,11 @@ router.use(
   })
 );
 
-router.get("/", test);
+
+const test = (req, res) => {
+  console.log('GET /api/products - Hello World route accessed');
+  res.send('Hello World');
+};
 
 router.post("/login", login);
 
