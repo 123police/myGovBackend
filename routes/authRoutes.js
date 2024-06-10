@@ -13,7 +13,8 @@ const {
 router.use(
   cors({
     credentials: true,
-    origin: "https://my-gov-client.vercel.app",
+    origin: {"https://my-gov-client.vercel.app"},
+    methods: {"POST", "GET"},
   })
 );
 
