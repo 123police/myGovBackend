@@ -14,7 +14,7 @@ const {
 router.use(
   cors({
     credentials: true,
-    origin: "*",
+    origin: "https://my-gov-client.vercel.app",
   })
 );
 
