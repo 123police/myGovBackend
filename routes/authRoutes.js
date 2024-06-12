@@ -15,6 +15,7 @@ router.use(
   cors({
     credentials: true,
     origin: "https://my-gov-client.vercel.app",
+      allowedHeaders: ['Content-Type', 'Authorization'], 
   })
 );
 
