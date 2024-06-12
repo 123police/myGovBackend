@@ -11,13 +11,16 @@ const {
 
 // MIDDLEWARE
 
-router.use(
-  cors({
-    credentials: true,
-    origin: "*",
-      allowedHeaders: ['Content-Type', 'Authorization'], 
-  })
-);
+
+const corsOptions = {
+  origin: "https://my-gov-client.vercel.app",
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+// Apply CORS middleware
+router.use(cors(corsOptions));
 
 router.post("/login", login);
 
