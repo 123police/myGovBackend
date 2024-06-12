@@ -17,7 +17,7 @@ mongoose
   .catch((err) => console.log("DataBase not connected", err));
 
 //   middle ware
-
+app.use(cors({ origin: "https://my-gov-client.vercel.app", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
