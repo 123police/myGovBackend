@@ -1,32 +1,36 @@
-//
 const express = require("express");
-const router = express.Router();
+const dotenv = require("dotenv").config();
 const cors = require("cors");
-const {
-  test,
-  login,
-  forgotPassword,
-  getAllUsers,
-} = require("../controllers/authController");
+const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+const path = require("path");
 
-// MIDDLEWARE
+const app = express();
 
+// Middleware
+app.use(
+  cors({
+    origin: "https://my-gov-client.vercel.app", // Your frontend URL
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
-const corsOptions = {
-  origin: "https://my-gov-client.vercel.app",
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-};
+app.use(express.json());
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
+app.use("/public", express.static(path.join(__dirname, "public")));
 
-// Apply CORS middleware
-router.use(cors(corsOptions));
+// Database connection
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => console.log("Database connected"))
+  .catch((err) => console.log("Database not connected", err));
 
-router.post("/login", login);
+// Routes
+app.use("/api", require("./routes/authRoutes"));
 
-router.post("/forgotPassword", forgotPassword);
+const port = process.env.PORT || 3001;
 
-router.get("/admin/users", getAllUsers);
-
-module.exports = router;
-
+app.listen(port, () => console.log(`Server is running on port ${port}`));
