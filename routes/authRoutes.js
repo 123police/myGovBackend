@@ -12,7 +12,7 @@ const {
 // MIDDLEWARE
 
 const corsOptions = {
-  origin: "https://my-gov-client.vercel.app",
+  origin: "*",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
