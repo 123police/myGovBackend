@@ -20,7 +20,8 @@ const corsOptions = {
 
 app.use("/api", require("./routes/authRoutes"));
 
-router.use(cors(corsOptions));
+// Apply CORS middleware to the entire app
+app.use(cors(corsOptions));
 
 router.post("/login", login);
 
