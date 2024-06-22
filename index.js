@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
-const { mongoose } = require("mongoose");
+const mongoose = require("mongoose"); // Corrected import
 const app = express();
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
@@ -9,23 +9,23 @@ const path = require("path");
 
 app.use("/public", express.static(path.join(__dirname, "public")));
 
-// data base connection
-
+// Database connection
 mongoose
   .connect(process.env.MONGO_URL)
-  .then(() => console.log("DataBase connected"))
-  .catch((err) => console.log("DataBase not connected", err));
+  .then(() => console.log("Database connected"))
+  .catch((err) => console.log("Database not connected", err));
 
-//   middle ware
+// Middleware
 app.use(cors({ origin: "https://my-gov-client.vercel.app", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
-app.use("/", require("./routes/authRoutes"));
+// Routes
+app.use("/api", require("./routes/authRoutes"));
 
+const port = process.env.PORT || 3001;
+app.listen(port, () => console.log(`Server is running on port ${port}`));
 
-const port = 3001;
-
-app.listen(port, () => console.log(`server is running on port ${port}`));
+module.exports = app;
